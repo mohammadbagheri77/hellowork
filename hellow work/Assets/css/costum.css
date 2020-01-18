@@ -1,0 +1,12 @@
+﻿@font-face {
+    font-family: 'Dima Shekasteh';
+    src: url('../fonts/Dima Shekasteh.ttf') format('truetype');
+}
+* {
+    font-family: 'Dima Shekasteh';
+}
+
+
+.w-100{
+    width:100%
+}
