@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 
 namespace hellow_work.Controllers
-{
+{ 
     public class maincontrollers
     {
         public string insertsToTUBUSER(string posted)
