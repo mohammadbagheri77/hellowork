@@ -155,7 +155,7 @@
                     contentType: "application/json; charset=utf-8",
                     success: function (response) {
                       //  alert(response.d);
-                        document.getElementById("ok").innerHTML = "با مو فقیت ثبت شد";
+                        document.getElementById("ok").innerHTML = "با موفقیت ثبت شد";
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                       //  alert(textStatus);
