@@ -1,9 +1,9 @@
 ﻿@font-face {
-    font-family: 'Dima Shekasteh';
-    src: url('../fonts/Dima Shekasteh.ttf') format('truetype');
+    font-family: 'IRTehran';
+    src: url('../fonts/IRTehran.ttf') format('truetype');
 }
 * {
-    font-family: 'Dima Shekasteh';
+    font-family: 'IRTehran';
 }
 
 

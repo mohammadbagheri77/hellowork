@@ -17,10 +17,10 @@ namespace hellow_work.Controllers
         }
         [WebMethod]
         [ScriptMethod]
-        public static string submituser(string posted)
+        public static string submituser(string Posted)
         {
             maincontrollers mc = new maincontrollers();
-            return (mc.insertsToTUBUSER(posted));
+            return (mc.insertsToTUBUSER(Posted));
         }
     }
 }

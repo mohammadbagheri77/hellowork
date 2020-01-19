@@ -4,7 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta charset="utf-8" />
+    
+
     <title></title>
+    
 
     <link href="Assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="Assets/css/bootstrap-theme.min.css" rel="stylesheet" />
@@ -60,7 +63,9 @@
 
 
 
-    <form id="form1" runat="server">
+
+
+    <form name="myform1" id="form1" runat="server">
 
         <div class="container">
 
@@ -72,7 +77,7 @@
                         <div class="form-group">
                             <label for="inputEmail" class="col-lg-2 control-label">نام کاربری</label>
                             <div class="col-lg-10">
-                                <input type="text" name="tshp-un" class="form-control" id="inputun" placeholder="">
+                                <input type="text" name="tshp-un" class="form-control" id="inputun" placeholder="نام کاربری خود را وارد کنید">
                             </div>
                         </div>
                         <div class="form-group">
@@ -90,15 +95,27 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="textArea" class="col-lg-2 control-label">توضیحات</label>
+                            <label for="inputPassword" class="col-lg-2 control-label">رمز ورود</label>
                             <div class="col-lg-10">
-                                <input class="form-control" name="tshp-destxt" id="textArea">
+                                <input type="password" class="form-control" id="inputRePass" placeholder="رمز ورود">
+                                <label class="control-label" id="errorRePass" style="color: red" for="inputError"></label>
                             </div>
                         </div>
 
                         <div class="form-group">
+                            <label for="textArea" class="col-lg-2 control-label">توضیحات</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" name="tshp-destxt" id="textArea" placeholder="توضیحات خود را وارد کنید">
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="form-group">
                             <div class="col-lg-2 col-md-4 col-xs-6 col-xl-6">
                                 <button type="reset" class="btn btn-danger w-100">Cancel</button>
+                                <label class="control-label" id="ok" style="color: red" for="inputError"></label>
                             </div>
                             <div class="col-lg-10 col-md-8 col-xs-6 col-xl-6">
                                 <button type="submit" onclick="return postToControll();" class="btn btn-primary w-100">Submit</button>
@@ -111,31 +128,49 @@
             </div>
         </div>
 
-
-
     </form>
+
+
+
+
     <script src="Assets/js/jquery.min.js"></script>
     <script src="Assets/js/bootstrap.min.js"></script>
     <script>
 
-        function postToControll() {
-            var JsonRequest = objectifyForm();
-            var PostJson = { 'Posted': JsonRequest };
 
-            $.ajax({
-                url: "./Controllers/WebForm1.aspx/submituser",
-                type: "post",
-                data: JSON.stringify(PostJson),
-                contentType: "application/json; charset=utf-8",
-                success: function (response) {
-                    alert(response.d);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(textStatus);
-                }
-            });
-       
-        return false;
+
+
+        function postToControll() {
+            var pass1 = document.getElementById("inputPassword").value;
+            var pass2 = document.getElementById("inputRePass").value;
+            if (pass1 == pass2) {
+
+                var JsonRequest = objectifyForm();
+                var PostJson = { 'Posted': JsonRequest };
+
+                $.ajax({
+                    url: "./Controllers/maincontrollers.aspx/submituser",
+                    type: "post",
+                    data: JSON.stringify(PostJson),
+                    contentType: "application/json; charset=utf-8",
+                    success: function (response) {
+                      //  alert(response.d);
+                        document.getElementById("ok").innerHTML = "با مو فقیت ثبت شد";
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                      //  alert(textStatus);
+                        document.getElementById("ok").innerHTML = "دوباره تلاش کنید";
+                    }
+                });
+
+                return false;
+
+            } else {
+
+                document.getElementById("errorRePass").innerHTML = "رمز ورود اشتباه است!!";
+                return false;
+
+            }
         }
         function objectifyForm() {
             var inp = $("#MAINPOSTERGETER :input");
@@ -157,7 +192,6 @@
                         rObject[inp[i]['name'].replace("tshp-", "")] = inp[i]['value'];
                 }
             }
-
 
             return JSON.stringify(rObject);
         }
