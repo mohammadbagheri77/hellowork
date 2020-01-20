@@ -1,9 +1,9 @@
 ﻿@font-face {
-    font-family: 'IRTehran';
-    src: url('../fonts/IRTehran.ttf') format('truetype');
+    font-family: 'IRZar';
+    src: url('../fonts/IRZar.ttf') format('truetype');
 }
 * {
-    font-family: 'IRTehran';
+    font-family: 'IRZar';
 }
 
 
