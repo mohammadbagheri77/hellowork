@@ -19,6 +19,8 @@ namespace hellow_work.Models
 
         [JsonProperty("destxt")]
         public string destxt { set; get; }
-      
+        [JsonProperty("captcha")]
+        public string captcha { get; set; }
+
     }
 }

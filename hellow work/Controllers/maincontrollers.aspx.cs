@@ -19,8 +19,17 @@ namespace hellow_work.Controllers
         [ScriptMethod]
         public static string submituser(string Posted)
         {
-            maincontrollers mc = new maincontrollers();
-            return (mc.insertsToTUBUSER(Posted));
+            if (HttpContext.Current.Session["CaptchaVerify"] != null)
+            {
+                maincontrollers mc = new maincontrollers();
+                string res = mc.insertsToTUBUSER(Posted);
+                if (HttpContext.Current.Session["CaptchaVerify"].ToString() == mc.sessionCaptcha)
+                {
+                    HttpContext.Current.Session["CaptchaVerify"] = Guid.NewGuid();
+                    return (res);
+                }
+            }
+            return "0";
         }
     }
 }

@@ -16,7 +16,6 @@
 
 
 
-
 <body>
     <nav class="navbar navbar-default">
         <div class="container-fluid" style="background-color: black">
@@ -108,15 +107,29 @@
                             <label for="textArea" class="col-lg-2 control-label">توضیحات</label>
                             <div class="col-lg-10">
                                 <input class="form-control" name="tshp-destxt" id="textArea" placeholder="توضیحات خود را وارد کنید">
-                                 <label class="control-label" id="error4" style="color: red" for="inputError"></label>
+                                <label class="control-label" id="error4" style="color: red" for="inputError"></label>
                             </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="textArea" class="col-lg-2 control-label">عبارات را به درستی وارد کنید </label>
+                            <div class="col-lg-12" id="imgcaptcha">
+                                <img class="form-control" src="data:image/png;base64,url(Controllers/captcha.aspx)" />
+
+                            </div>
+                            <div class="col-12">
+                                <input type="text" name="tshp-captcha" class="form-control" id="captcha" placeholder="متن تصویر را وارد نمایید!">
+                            </div>
+                        </div>
+
+                        <div class="cal-12" id="show">
                         </div>
 
 
                         <div class="form-group">
                             <div class="col-lg-2 col-md-4 col-xs-6 col-xl-6">
                                 <button type="reset" onclick="return Cancel();" class="btn btn-danger w-100">Cancel</button>
-                                <label class="control-label" id="ok" style="color: red" for="inputError"></label>
+
                             </div>
                             <div class="col-lg-10 col-md-8 col-xs-6 col-xl-6">
                                 <button type="submit" onclick="return postToControll();" class="btn btn-primary w-100">Submit</button>
@@ -129,13 +142,24 @@
             </div>
         </div>
 
-    </form>
 
+    </form>
 
 
 
     <script src="Assets/js/jquery.min.js"></script>
     <script src="Assets/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: "./Controllers/captcha.aspx",
+                type: "GET",
+                success: function (res) {
+                    $("#imgcaptcha").replaceWith(' <img  class="form-control"  style="width: 50%;height: 176px;" src="data:image/png;base64,' + res + '" />');
+                }
+            });
+        });
+    </script>
     <script>
 
         function Cancel() {
@@ -145,6 +169,7 @@
             document.getElementById("error3").innerHTML = "";
             document.getElementById("errorRePass").innerHTML = "";
             document.getElementById("error4").innerHTML = "";
+            document.getElementById("show").style = "display:none";
         }
 
 
@@ -156,28 +181,23 @@
             var inputEmail = document.getElementById("inputEmail").value;
             var textArea = document.getElementById("textArea").value;
 
-            if (inputun == "")
-            {
+            if (inputun == "") {
                 document.getElementById("error1").innerHTML = "پر کنید!!";
             }
 
-            if (inputEmail == "")
-            {
+            if (inputEmail == "") {
                 document.getElementById("error2").innerHTML = "پر کنید!!";
             }
 
-            if (pass1 == "")
-            {
+            if (pass1 == "") {
                 document.getElementById("error3").innerHTML = "پر کنید!!";
             }
 
-            if (pass2 == "")
-            {
+            if (pass2 == "") {
                 document.getElementById("errorRePass").innerHTML = "پر کنید!!";
             }
 
-            if (textArea == "")
-            {
+            if (textArea == "") {
                 document.getElementById("error4").innerHTML = "پر کنید!!";
                 return false;
             }
@@ -186,19 +206,23 @@
 
                 var JsonRequest = objectifyForm();
                 var PostJson = { 'Posted': JsonRequest };
-
                 $.ajax({
                     url: "./Controllers/maincontrollers.aspx/submituser",
                     type: "post",
                     data: JSON.stringify(PostJson),
                     contentType: "application/json; charset=utf-8",
                     success: function (response) {
-                        //  alert(response.d);
-                        document.getElementById("ok").innerHTML = "با موفقیت ثبت شد";
+                        if (response.d == "1") {
+
+                            $("#show").html('<div class="btn btn-success w-100" style="margin-bottom: 12px;"><span id="ok" >با موفقیت ثبت شد</span></div>');
+                        } else {
+                            $("#show").append('<div class="btn btn-danger w-100" style="margin-bottom: 12px;"><span id="ok">دوباره تلاش کنید</span></div>');
+
+                        }
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
-                        //  alert(textStatus);
-                        document.getElementById("ok").innerHTML = "دوباره تلاش کنید";
+                        $("#show").innerHTML = '<div class="btn btn-danger w-100" style="margin-bottom: 12px;">< span id="ok" >دوباره تلاش کنید</span ></div >';
+
                     }
                 });
 

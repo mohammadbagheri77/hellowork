@@ -10,9 +10,11 @@ namespace hellow_work.Controllers
 { 
     public class maincontrollers
     {
+        public string sessionCaptcha = "";
         public string insertsToTUBUSER(string posted)
         {
             tblUserStruct obj = JsonConvert.DeserializeObject<tblUserStruct>(posted);
+            sessionCaptcha = obj.captcha;
             PDBC db = new PDBC("honarjoo");
             db.Connect();
             return db.Script($"INSERT INTO tblUsers (id ,un ,email ,password ,destxt ) VALUES ({new Random().Next()},N'{obj.un}',N'{obj.email}',N'{obj.password}',N'{obj.destxt}' )");

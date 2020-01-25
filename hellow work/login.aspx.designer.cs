@@ -10,7 +10,7 @@
 namespace hellow_work {
     
     
-    public partial class WebForm1 {
+    public partial class login {
         
         /// <summary>
         /// form1 control.
