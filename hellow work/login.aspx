@@ -57,17 +57,138 @@
     </nav>
 
     <form name="myform1" id="form1" runat="server">
-        <div class="container">
+
+        <div id="show2">
+        </div>
+
+
+
+        <div class="container" style="width: 612px;">
             <div class="jumbotron">
-                <h1>Jumbotron</h1>
-                
+                <p style="text-align: center;">ورود به حساب کاربری</p>
+                <div class="form-horizontal" id="MAINPOSTERGETER">
+                    <fieldset>
+
+                        <div class="form-group">
+                            <label for="inputun" class="col-lg-2 control-label">نام كاربري</label>
+                            <div class="col-lg-10">
+                                <input type="text" name="tshp-us" class="form-control" id="inputun" placeholder="نام كاربري" required />
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="inputPassword" class="col-lg-2 control-label">رمز عبور</label>
+                            <div class="col-lg-10">
+                                <input type="password" name="tshp-pass" class="form-control" id="inputPass" placeholder="رمز عبور" required />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="textArea" class="col-lg-2 control-label">عبارات را به درستی وارد کنید </label>
+                            <div class="col-lg-12" id="imgcaptcha">
+                                <img class="form-control" src="data:image/png;base64,url(Controllers/captcha.aspx)" />
+                            </div>
+                            <div class="col-12">
+                                <input type="text" name="tshp-captcha" class="form-control" id="captcha" placeholder="متن تصویر را وارد نمایید!" required />
+                            </div>
+                        </div>
+
+                        <div class="cal-12" id="show">
+                        </div>
+
+                        <div class="cal-12">
+                            <button type="submit" onclick="return postToControll();" style="text-align: center;" class="btn btn-success w-100"  >ورود</button>
+                        </div>
+
+                    </fieldset>
+                </div>
+
             </div>
         </div>
+
+
     </form>
 
 
 
     <script src="Assets/js/jquery.min.js"></script>
     <script src="Assets/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: "./Controllers/captcha.aspx",
+                type: "GET",
+                success: function (res) {
+                    $("#imgcaptcha").replaceWith(' <img  class="form-control"  style="width: 36%;height: 94px;margin: 12px;" src="data:image/png;base64,' + res + '" />');
+                }
+            });
+        });
+    </script>
+
+
+    <script>
+       
+        function postToControll() {
+
+
+            var JsonRequest = objectifyForm();
+            var PostJson = { 'Posted': JsonRequest };
+            $.ajax({
+                url: "./Controllers/logincontrollers.aspx/submituser",
+                type: "post",
+                data: JSON.stringify(PostJson),
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                  //  alert(response.d);
+
+                    if (response.d == "-1") {
+
+                        $("#show").html('<div class="btn btn-danger w-100" style="margin-bottom: 12px;"><span id="ok">رمز ورود یا نام کاربری اشتباه است!!!</span></div>');
+
+                    } else {
+                        $("#show2").replaceWith('<div id="show2" class="alert alert-dismissible "style="background-color: orange;"> <button type ="button"  class="close" data-dismiss="alert">&times;</button > <h4> سلام</h4> <p id="name"> </p></div> ');
+                        var x = document.getElementById("name");
+                        x.innerHTML = response.d + "  خوش آمدید";
+                        x.style.fontSize = "25px";
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+
+                    $("#show").innerHTML = '<div class="btn btn-danger w-100" style="margin-bottom: 12px;">< span id="ok" >دوباره تلاش کنید</span ></div >';
+                }
+            });
+
+            return false;
+
+            //alert(objectifyForm());  onclick="return postToControll();
+            //return false;
+        }
+
+        function objectifyForm() {
+            var inp = $("#MAINPOSTERGETER :input");
+            var rObject = {};
+            for (var i = 0; i < inp.length; i++) {
+                if (inp[i]['name'].substr(inp[i]['name'].length - 2) == "[]") {
+                    var tmp = inp[i]['name'].substr(0, inp[i]['name'].length - 2);
+                    if (Array.isArray(rObject[tmp])) {
+                        if (inp[i]['name'].includes("tshp-"))
+                            rObject[tmp].push(inp[i]['value']);
+                    } else {
+                        rObject[tmp] = [];
+                        rObject[tmp].push(inp[i]['value']);
+                    }
+                } else {
+                    if (inp[i]['name'].includes("tshp-"))
+                        rObject[inp[i]['name'].replace("tshp-", "")] = inp[i]['value'];
+                }
+            }
+            return JSON.stringify(rObject);
+        }
+    </script>
+
+
+
+
 </body>
 </html>

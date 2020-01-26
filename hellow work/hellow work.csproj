@@ -85,10 +85,12 @@
     <Content Include="Assets\js\jquery.min.js" />
     <Content Include="Assets\js\npm.js" />
     <Content Include="Controllers\captcha.aspx" />
+    <Content Include="Controllers\logincontrollers.aspx" />
     <Content Include="Controllers\maincontrollers.aspx" />
     <Content Include="login.aspx" />
     <Content Include="Web.config" />
     <Content Include="WebForm1.aspx" />
+    <Content Include="WebForm2.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\captcha.aspx.cs">
@@ -98,6 +100,14 @@
     <Compile Include="Controllers\captcha.aspx.designer.cs">
       <DependentUpon>captcha.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\logincontrollers.aspx.cs">
+      <DependentUpon>logincontrollers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controllers\logincontrollers.aspx.designer.cs">
+      <DependentUpon>logincontrollers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\logincontrollers.cs" />
     <Compile Include="Controllers\maincontrollers.aspx.cs">
       <DependentUpon>maincontrollers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -114,6 +124,7 @@
       <DependentUpon>login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\tblUserStruct.cs" />
+    <Compile Include="Models\user_login.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
@@ -121,6 +132,13 @@
     </Compile>
     <Compile Include="WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

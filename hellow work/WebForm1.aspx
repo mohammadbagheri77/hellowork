@@ -135,7 +135,6 @@
                                 <button type="submit" onclick="return postToControll();" class="btn btn-primary w-100">Submit</button>
                             </div>
 
-
                         </div>
                     </fieldset>
                 </div>
@@ -216,7 +215,7 @@
 
                             $("#show").html('<div class="btn btn-success w-100" style="margin-bottom: 12px;"><span id="ok" >با موفقیت ثبت شد</span></div>');
                         } else {
-                            $("#show").append('<div class="btn btn-danger w-100" style="margin-bottom: 12px;"><span id="ok">دوباره تلاش کنید</span></div>');
+                            $("#show").html('<div class="btn btn-danger w-100" style="margin-bottom: 12px;"><span id="ok">دوباره تلاش کنید</span></div>');
 
                         }
                     },
@@ -236,18 +235,17 @@
 
             }
         }
+
         function objectifyForm() {
             var inp = $("#MAINPOSTERGETER :input");
             var rObject = {};
             for (var i = 0; i < inp.length; i++) {
-
                 if (inp[i]['name'].substr(inp[i]['name'].length - 2) == "[]") {
                     var tmp = inp[i]['name'].substr(0, inp[i]['name'].length - 2);
                     if (Array.isArray(rObject[tmp])) {
                         if (inp[i]['name'].includes("tshp-"))
                             rObject[tmp].push(inp[i]['value']);
                     } else {
-
                         rObject[tmp] = [];
                         rObject[tmp].push(inp[i]['value']);
                     }
@@ -256,7 +254,6 @@
                         rObject[inp[i]['name'].replace("tshp-", "")] = inp[i]['value'];
                 }
             }
-
             return JSON.stringify(rObject);
         }
 
