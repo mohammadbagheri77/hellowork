@@ -60,8 +60,6 @@
         <div id="show2">
         </div>
 
-
-
         <div class="container" style="width: 612px;">
             <div class="jumbotron">
                 <p style="text-align: center;">ورود به حساب کاربری</p>
@@ -105,15 +103,18 @@
 
             </div>
         </div>
-
-
     </form>
-
-
+    
 
     <script src="Assets/js/jquery.min.js"></script>
     <script src="Assets/js/bootstrap.min.js"></script>
+
     <script>
+          /*  <form action="show.aspx" method="get" name="form1" id="form2">
+                <input type="text" name="show">
+                <input type="submit" name="submit">
+               </form>
+          */  
         $(document).ready(function () {
             $.ajax({
                 url: "./Controllers/captcha.aspx",
@@ -130,8 +131,6 @@
        
         function postToControll() {
 
-
-           
             var inputun = document.getElementById("inputun").value;
             var inputPass = document.getElementById("inputPass").value;
             var captcha = document.getElementById("captcha").value;
@@ -161,10 +160,8 @@
                         $("#show").html('<div class="btn btn-danger w-100" style="margin-bottom: 12px;"><span id="ok">متن تصویر را درست وارد نشده است!!!</span></div>');
 
                     } else {
-                        $("#show2").replaceWith('<div id="show2" class="alert alert-dismissible "style="background-color: orange;"> <button type ="button"  class="close" data-dismiss="alert">&times;</button > <h4> سلام</h4> <p id="name"> </p></div> ');
-                        var x = document.getElementById("name");
-                        x.innerHTML = response.d + "  خوش آمدید";
-                        x.style.fontSize = "25px";
+
+                        window.location.href = "show.aspx?show="+response.d+"&submit=Submit+Query";
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -175,7 +172,7 @@
 
             return false;
 
-            //alert(objectifyForm());  onclick="return postToControll();
+            //alert(objectifyForm());  
             //return false;
         }
 
