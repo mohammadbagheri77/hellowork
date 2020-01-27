@@ -97,7 +97,7 @@
                         </div>
 
                         <div class="cal-12">
-                            <button type="submit" onclick="return postToControll();" style="text-align: center;" class="btn btn-success w-100"  >ورود</button>
+                            <button type="submit" onclick="return postToControll();" style="text-align: center;" class="btn btn-success w-100">ورود</button>
                         </div>
 
                     </fieldset>
@@ -131,6 +131,17 @@
         function postToControll() {
 
 
+           
+            var inputun = document.getElementById("inputun").value;
+            var inputPass = document.getElementById("inputPass").value;
+            var captcha = document.getElementById("captcha").value;
+    
+
+            if (inputun == "" || inputPass == "" || captcha == "") {
+                $("#show").html('<div class="btn btn-danger w-100" style="margin-bottom: 12px;"><span id="ok">فیلد خالی است !!!</span></div>');
+                return false;
+            }
+
             var JsonRequest = objectifyForm();
             var PostJson = { 'Posted': JsonRequest };
             $.ajax({
@@ -144,6 +155,10 @@
                     if (response.d == "-1") {
 
                         $("#show").html('<div class="btn btn-danger w-100" style="margin-bottom: 12px;"><span id="ok">رمز ورود یا نام کاربری اشتباه است!!!</span></div>');
+
+                    } else if (response.d == "0") {
+
+                        $("#show").html('<div class="btn btn-danger w-100" style="margin-bottom: 12px;"><span id="ok">متن تصویر را درست وارد نشده است!!!</span></div>');
 
                     } else {
                         $("#show2").replaceWith('<div id="show2" class="alert alert-dismissible "style="background-color: orange;"> <button type ="button"  class="close" data-dismiss="alert">&times;</button > <h4> سلام</h4> <p id="name"> </p></div> ');
