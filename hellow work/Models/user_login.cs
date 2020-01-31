@@ -11,11 +11,16 @@ namespace hellow_work.Models
         [JsonProperty("us")]
         public string us { set; get; }
 
+        [JsonProperty("name")]
+        public string name { set; get; }
+
         [JsonProperty("pass")]
         public string pass { set; get; }
 
         [JsonProperty("captcha")]
         public string captcha { get; set; }
+
+        public bool islogin = false;
 
     }
 

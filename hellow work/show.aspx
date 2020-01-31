@@ -12,9 +12,20 @@
 </head>
 <body>
 
-    <div id="show2">
-    </div>
+    
+    <div  class="alert alert-dismissible " style="background-color: orange;">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+   <h4>سلام</h4>
+        <p> 
+            <%=obj.name %>
+        </p></div>
 
+
+    <div id="show2">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+       
+
+    </div>
 
     <form id="form1" runat="server">
         <div>
@@ -28,24 +39,10 @@
 
     <script>
 
-        $("#show2").replaceWith('<div id="show2" class="alert alert-dismissible "style="background-color: orange;"> <button type ="button"  class="close" data-dismiss="alert">&times;</button > <h4> سلام</h4> <p id="name"> </p></div> ');
+        $("#show2").replaceWith('');
         var x = document.getElementById("name");
-        x.innerHTML = findGetParameter("show") + "  خوش آمدید";
+        x.innerHTML = findGetParameter("showing") + "  خوش آمدید";
         x.style.fontSize = "25px";
-       
-
-        function findGetParameter(parameterName) {
-            var result = null,
-                tmp = [];
-            location.search
-                .substr(1)
-                .split("&")
-                .forEach(function (item) {
-                    tmp = item.split("=");
-                    if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
-                });
-            return result;
-        }
 
     </script>
 

@@ -87,6 +87,7 @@
     <Content Include="Controllers\captcha.aspx" />
     <Content Include="Controllers\logincontrollers.aspx" />
     <Content Include="Controllers\maincontrollers.aspx" />
+    <Content Include="default.aspx" />
     <Content Include="login.aspx" />
     <Content Include="show.aspx" />
     <Content Include="Web.config" />
@@ -117,6 +118,13 @@
       <DependentUpon>maincontrollers.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\maincontrollers.cs" />
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

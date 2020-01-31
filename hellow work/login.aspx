@@ -69,7 +69,7 @@
                         <div class="form-group">
                             <label for="inputun" class="col-lg-2 control-label">نام كاربري</label>
                             <div class="col-lg-10">
-                                <input type="text" name="tshp-us" class="form-control" id="inputun" placeholder="نام كاربري" required />
+                                <asp:TextBox ID="inputun" type="text" CssClass="form-control" placeholder="نام كاربري" runat="server"></asp:TextBox>
                             </div>
                         </div>
 
@@ -77,7 +77,7 @@
                         <div class="form-group">
                             <label for="inputPassword" class="col-lg-2 control-label">رمز عبور</label>
                             <div class="col-lg-10">
-                                <input type="password" name="tshp-pass" class="form-control" id="inputPass" placeholder="رمز عبور" required />
+                                <asp:TextBox type="password" CssClass="form-control" ID="inputPass" runat="server" placeholder="رمز عبور"></asp:TextBox>
                             </div>
                         </div>
 
@@ -87,7 +87,8 @@
                                 <img class="form-control" src="data:image/png;base64,url(Controllers/captcha.aspx)" />
                             </div>
                             <div class="col-12">
-                                <input type="text" name="tshp-captcha" class="form-control" id="captcha" placeholder="متن تصویر را وارد نمایید!" required />
+
+                                <asp:TextBox ID="captcha" CssClass="form-control" placeholder="متن تصویر را وارد نمایید!" runat="server"></asp:TextBox>
                             </div>
                         </div>
 
@@ -95,29 +96,29 @@
                         </div>
 
                         <div class="cal-12">
-                            <button type="submit" onclick="return postToControll();" style="text-align: center;" class="btn btn-success w-100">ورود</button>
+                            <asp:Button ID="Button2" runat="server" Text="ورود" CssClass="btn btn-success w-100" OnClick="Button1_Click" />
                         </div>
-
                     </fieldset>
                 </div>
 
             </div>
         </div>
     </form>
-    
+
 
     <script src="Assets/js/jquery.min.js"></script>
     <script src="Assets/js/bootstrap.min.js"></script>
 
     <script>
-          /*  <form action="show.aspx" method="get" name="form1" id="form2">
-                <input type="text" name="show">
-                <input type="submit" name="submit">
-               </form>
-          */  
+        /*  
+             <form action="show.aspx" method="get" name="form1" id="form2">
+              <input type="text" name="showing">
+              <input type="submit" name="submit">
+             </form>
+        */
         $(document).ready(function () {
             $.ajax({
-                url: "./Controllers/captcha.aspx",
+                url: "./Controllers/captcha.aspx?CaptchaKey=loginform",
                 type: "GET",
                 success: function (res) {
                     $("#imgcaptcha").replaceWith(' <img  class="form-control"  style="width: 36%;height: 94px;margin: 12px;" src="data:image/png;base64,' + res + '" />');
@@ -128,13 +129,13 @@
 
 
     <script>
-       
+
         function postToControll() {
 
             var inputun = document.getElementById("inputun").value;
             var inputPass = document.getElementById("inputPass").value;
             var captcha = document.getElementById("captcha").value;
-    
+
 
             if (inputun == "" || inputPass == "" || captcha == "") {
                 $("#show").html('<div class="btn btn-danger w-100" style="margin-bottom: 12px;"><span id="ok">فیلد خالی است !!!</span></div>');
@@ -149,7 +150,7 @@
                 data: JSON.stringify(PostJson),
                 contentType: "application/json; charset=utf-8",
                 success: function (response) {
-                  // alert(response.d);
+                    // alert(response.d);
 
                     if (response.d == "-1") {
 
@@ -161,7 +162,7 @@
 
                     } else {
 
-                        window.location.href = "show.aspx?show="+response.d+"&submit=Submit+Query";
+                        window.location.href = "show.aspx?showing=" + response.d + "&submit=Submit+Query";
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -172,30 +173,10 @@
 
             return false;
 
-            //alert(objectifyForm());  
-            //return false;
+            
         }
 
-        function objectifyForm() {
-            var inp = $("#MAINPOSTERGETER :input");
-            var rObject = {};
-            for (var i = 0; i < inp.length; i++) {
-                if (inp[i]['name'].substr(inp[i]['name'].length - 2) == "[]") {
-                    var tmp = inp[i]['name'].substr(0, inp[i]['name'].length - 2);
-                    if (Array.isArray(rObject[tmp])) {
-                        if (inp[i]['name'].includes("tshp-"))
-                            rObject[tmp].push(inp[i]['value']);
-                    } else {
-                        rObject[tmp] = [];
-                        rObject[tmp].push(inp[i]['value']);
-                    }
-                } else {
-                    if (inp[i]['name'].includes("tshp-"))
-                        rObject[inp[i]['name'].replace("tshp-", "")] = inp[i]['value'];
-                }
-            }
-            return JSON.stringify(rObject);
-        }
+       
     </script>
 
 
