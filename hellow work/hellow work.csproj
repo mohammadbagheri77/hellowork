@@ -87,9 +87,11 @@
     <Content Include="Controllers\captcha.aspx" />
     <Content Include="Controllers\logincontrollers.aspx" />
     <Content Include="Controllers\maincontrollers.aspx" />
+    <Content Include="Controllers\up_loder.aspx" />
     <Content Include="default.aspx" />
     <Content Include="login.aspx" />
     <Content Include="show.aspx" />
+    <Content Include="uploder.aspx" />
     <Content Include="Web.config" />
     <Content Include="WebForm1.aspx" />
     <Content Include="WebForm2.aspx" />
@@ -118,6 +120,13 @@
       <DependentUpon>maincontrollers.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\maincontrollers.cs" />
+    <Compile Include="Controllers\up_loder.aspx.cs">
+      <DependentUpon>up_loder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controllers\up_loder.aspx.designer.cs">
+      <DependentUpon>up_loder.aspx</DependentUpon>
+    </Compile>
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -132,6 +141,7 @@
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Statics.cs" />
     <Compile Include="Models\tblUserStruct.cs" />
     <Compile Include="Models\user_login.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -141,6 +151,13 @@
     </Compile>
     <Compile Include="show.aspx.designer.cs">
       <DependentUpon>show.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="uploder.aspx.cs">
+      <DependentUpon>uploder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="uploder.aspx.designer.cs">
+      <DependentUpon>uploder.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
@@ -178,7 +195,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Assets\image\" />
+    <Folder Include="Assets\images\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
